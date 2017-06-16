@@ -11,13 +11,15 @@ public class Spawn : MonoBehaviour {
     {
         int i = Random.Range(0, group.Length);
         if(Next==null)
-        Current = (GameObject)Instantiate(group[i], transform.position, Quaternion.identity);
+        { 
+            Current = (GameObject)Instantiate(group[i], transform.position, Quaternion.identity);
+            Current.transform.SetParent(Nextblock.transform);
+        }
         else
         {
             Current = Next;
             Current.GetComponent<Group>().enabled = true;
             Current.transform.position =transform.position;
-            //Destroy(Next);
         }
         i = Random.Range(0, group.Length);
         Next =(GameObject)Instantiate(group[i], transform.position, Quaternion.identity);

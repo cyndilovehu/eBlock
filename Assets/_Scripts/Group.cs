@@ -7,6 +7,7 @@ public class Group : MonoBehaviour
 {
     Text point;
     float lastFall = 0;
+    bool isgameover = false;
     // Use this for initialization
     void Start () {
         point = GameObject.Find("Text").GetComponent<Text>();
@@ -14,12 +15,15 @@ public class Group : MonoBehaviour
         {
             Debug.Log("GAME OVER");
             Destroy(gameObject);
+            isgameover = true;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!isgameover)
+        {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             // Modify position
@@ -83,6 +87,8 @@ public class Group : MonoBehaviour
             }
             lastFall = Time.time;
         }
+
+        }
     }
     bool IsValidGridPos()
     {
@@ -112,7 +118,7 @@ public class Group : MonoBehaviour
                 }
             }
         }
-        foreach(Transform child in transform)
+        foreach (Transform child in transform)
         {
             //重新把方块的位置加入到网格中
             Vector2 v = Grid.roundVec2(child.position);
